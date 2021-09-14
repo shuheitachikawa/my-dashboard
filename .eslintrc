@@ -1,0 +1,7 @@
+{
+  "extends": ["next", "next/core-web-vitals"],
+  "rules": {
+    "import/order": [2, { "alphabetize": { "order": "asc" } }],
+    "@next/next/no-document-import-in-page": "off"
+  }
+}
