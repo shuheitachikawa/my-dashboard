@@ -1,21 +1,15 @@
-import Button from "@material-ui/core/Button";
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import { Dashboard } from "components/Dashboard";
+import { TextField } from "@material-ui/core";
+import Amplify from "aws-amplify";
+import awsconfig from "../aws-exports";
 
-const Home: NextPage = () => {
+Amplify.configure(awsconfig);
+
+export default function Auth() {
   return (
-    <Dashboard>
-      <Head>
-        <title>Create Next Appa</title>
-        <meta name="description" content="ダッシュボードアプリです" />
-      </Head>
-
-      <main>aaa</main>
-    </Dashboard>
+    <form noValidate autoComplete="off">
+      <TextField id="standard-basic" label="Standard" />
+      <TextField id="filled-basic" label="Filled" variant="filled" />
+      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+    </form>
   );
-};
-
-export default Home;
+}

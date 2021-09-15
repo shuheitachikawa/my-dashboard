@@ -1,0 +1,24 @@
+type TodoGroup @model {
+  id: ID!
+  userId: ID!
+  todos: [Todo]!
+  name: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
+  handleUpdatedAt: AWSDateTime
+}
+
+type Todo {
+  title: String!
+  text: String!
+  notificatedAt: AWSDateTime
+  index: Int!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
+  status: TodoStatus!
+}
+
+enum TodoStatus {
+  doing
+  done
+}
