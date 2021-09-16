@@ -10,7 +10,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { NextPage } from "next";
 import React from "react";
 // import styled from "styled-components";
-import { mainListItems } from "./ListItems";
+import { mainListItems } from "../organisms/ListItems";
 
 const drawerWidth = 200;
 

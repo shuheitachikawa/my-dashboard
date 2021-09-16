@@ -2,7 +2,7 @@ import Button from "@material-ui/core/Button";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { Dashboard } from "components/Dashboard";
+import { Dashboard } from "components/templates/Dashboard";
 
 export default function Todo() {
   return (
