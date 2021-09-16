@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { ServerStyleSheets } from "@material-ui/core/styles";
-import Document, { Head, Html, Main, NextScript } from "next/document";
-import React from "react";
-import { ServerStyleSheet } from "styled-components";
-import { theme } from "../styles/theme";
+import { ServerStyleSheets } from '@material-ui/core/styles';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
+import React from 'react';
+import { ServerStyleSheet } from 'styled-components';
+import { theme } from '../styles/theme';
 
 export default class MyDocument extends Document {
   render() {
@@ -13,7 +13,10 @@ export default class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          />
         </Head>
         <body>
           <Main />
@@ -59,8 +62,10 @@ MyDocument.getInitialProps = async (ctx) => {
       originalRenderPage({
         enhanceApp: (App) =>
           function _(props) {
-            return styledComponentsSheet.collectStyles(MuiSheets.collect(<App {...props} />));
-          },
+            return styledComponentsSheet.collectStyles(
+              MuiSheets.collect(<App {...props} />)
+            );
+          }
       });
 
     const initialProps = await Document.getInitialProps(ctx);
@@ -68,7 +73,11 @@ MyDocument.getInitialProps = async (ctx) => {
     return {
       ...initialProps,
       // Styles fragment is rendered after the app and page rendering finish.
-      styles: [...React.Children.toArray(initialProps.styles), MuiSheets.getStyleElement(), styledComponentsSheet.getStyleElement()],
+      styles: [
+        ...React.Children.toArray(initialProps.styles),
+        MuiSheets.getStyleElement(),
+        styledComponentsSheet.getStyleElement()
+      ]
     };
   } finally {
     styledComponentsSheet.seal();

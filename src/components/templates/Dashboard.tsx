@@ -1,35 +1,35 @@
-import AppBar from "@material-ui/core/AppBar";
-import Badge from "@material-ui/core/Badge";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { NextPage } from "next";
-import React from "react";
+import AppBar from '@material-ui/core/AppBar';
+import Badge from '@material-ui/core/Badge';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { NextPage } from 'next';
+import React from 'react';
 // import styled from "styled-components";
-import { mainListItems } from "../organisms/ListItems";
+import { ListItems } from 'components/organisms';
 
 const drawerWidth = 200;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
-      width: drawerWidth,
+      width: drawerWidth
     },
     appBar: {
       marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: `calc(100% - ${drawerWidth}px)`
     },
     drawerPaper: {
-      width: drawerWidth,
+      width: drawerWidth
     },
     content: {
       flexGrow: 1,
-      marginLeft: drawerWidth,
-    },
+      marginLeft: drawerWidth
+    }
   })
 );
 
@@ -49,10 +49,10 @@ export const Dashboard: NextPage = ({ children }) => {
       <Drawer
         variant="permanent"
         classes={{
-          paper: classes.drawerPaper,
+          paper: classes.drawerPaper
         }}
       >
-        <List>{mainListItems}</List>
+        <List>{ListItems}</List>
       </Drawer>
       <main className={classes.content}>
         <Container>

@@ -1,28 +1,28 @@
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import Check from "@material-ui/icons/Check";
-import LayersIcon from "@material-ui/icons/Layers";
-import PeopleIcon from "@material-ui/icons/People";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Link from "next/link";
-import React from "react";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import Check from '@material-ui/icons/Check';
+import LayersIcon from '@material-ui/icons/Layers';
+import PeopleIcon from '@material-ui/icons/People';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Link from 'next/link';
+import React from 'react';
 
 const menus = [
   {
-    name: "Todo",
+    name: 'Todo',
     icon: <Check />,
-    href: "/todo",
+    href: '/todo'
   },
   {
-    name: "Setting",
+    name: 'Setting',
     icon: <PeopleIcon />,
-    href: "/setting",
-  },
+    href: '/setting'
+  }
 ];
 
-export const mainListItems = (
+export const ListItems = (
   <div>
     {menus.map((menu) => {
       return (
