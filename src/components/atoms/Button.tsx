@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Loader } from 'components/atoms';
 
 interface Props {
   type: 'submit' | 'button';
   block?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
 }
 
 const ButtonView = styled.button<Props>`
@@ -15,16 +18,25 @@ const ButtonView = styled.button<Props>`
   font-size: 15px;
   outline: none;
   cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+  color: #333333;
+  :hover {
+    border: 1px solid #fff;
+    background: #5c93bb2b;
+  }
 `;
 
 export const Button: React.FC<Props> = ({
   type = 'submit',
   block = false,
+  loading = false,
+  disabled = false,
   children
 }) => {
   return (
-    <ButtonView type={type} block={block}>
-      {children}
+    <ButtonView type={type} block={block} disabled={disabled}>
+      {loading ? <Loader /> : children}
     </ButtonView>
   );
 };

@@ -11,7 +11,7 @@ interface Props {
 
 const TextFieldView = styled.input<Props>`
   width: ${(props) => (props.block ? '100%' : 'auto')};
-  padding: 0.6em 0 0.6em 0.7em;
+  padding: 0.8em 0 0.8em 0.7em;
   border-radius: 6px;
   background: #f1f5f9;
   border: 1px solid #5c93bb2b;

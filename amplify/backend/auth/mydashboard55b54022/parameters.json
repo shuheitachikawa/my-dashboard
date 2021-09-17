@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "mydashboard857cd3c7_identitypool_857cd3c7",
+    "identityPoolName": "mydashboard55b54022_identitypool_55b54022",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "mydash857cd3c7",
-    "userPoolName": "mydashboard857cd3c7_userpool_857cd3c7",
+    "resourceNameTruncated": "mydash55b54022",
+    "userPoolName": "mydashboard55b54022_userpool_55b54022",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -31,10 +31,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "mydash857cd3c7_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "mydash55b54022_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "857cd3c7",
-    "resourceName": "mydashboard857cd3c7",
+    "sharedId": "55b54022",
+    "resourceName": "mydashboard55b54022",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [

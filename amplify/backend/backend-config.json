@@ -1,13 +1,6 @@
 {
-  "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "type": "cicd",
-      "lastPushTimeStamp": "2021-09-15T13:28:49.589Z"
-    }
-  },
   "auth": {
-    "mydashboard857cd3c7": {
+    "mydashboard55b54022": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -30,23 +23,6 @@
         "verificationMechanisms": [
           "EMAIL"
         ]
-      }
-    }
-  },
-  "api": {
-    "mydashboard": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authmydashboard857cd3c7"
-            }
-          },
-          "additionalAuthenticationProviders": []
-        }
       }
     }
   }
