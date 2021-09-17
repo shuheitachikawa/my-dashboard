@@ -52,7 +52,9 @@ export const Dashboard: NextPage = ({ children }) => {
           paper: classes.drawerPaper
         }}
       >
-        <List>{ListItems}</List>
+        <List>
+          <ListItems />
+        </List>
       </Drawer>
       <main className={classes.content}>
         <Container>

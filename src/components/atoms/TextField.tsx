@@ -33,6 +33,7 @@ export const TextField: React.FC<Props> = ({
       block={block}
       placeholder={placeholder}
       onChange={onChange}
+      autoComplete='true'
     />
   );
 };

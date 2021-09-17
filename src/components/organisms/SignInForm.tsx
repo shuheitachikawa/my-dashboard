@@ -40,8 +40,8 @@ const SignInFormView = styled.form`
 
 export const SignInForm: React.FC = () => {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('shuhei.tusx@gmail.com');
+  const [password, setPassword] = useState('tachikawa');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -51,7 +51,7 @@ export const SignInForm: React.FC = () => {
     try {
       setSubmitting(true);
       await Auth.signIn(email, password);
-      router.push('/todo')
+      await router.push('/todo');
     } catch (error) {
       console.error(error);
       setError('エラー！');
