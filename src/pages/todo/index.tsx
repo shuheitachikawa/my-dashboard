@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { AddTodoGroupButton } from 'components/molecules';
 
 export default function Todo() {
   return (
@@ -7,7 +8,9 @@ export default function Todo() {
         <title>Todo</title>
         <meta name="description" content="Todoです。" />
       </Head>
-      <main>a</main>
+      <div className="">
+        <AddTodoGroupButton />
+      </div>
     </>
   );
 }

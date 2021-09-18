@@ -1,18 +1,14 @@
-import AppBar from '@mui/material/AppBar';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 import { NextPage } from 'next';
 import React from 'react';
 // import styled from "styled-components";
-import { ListItems } from 'components/organisms';
+import { ListItems, Header } from 'components/organisms';
 
-const drawerWidth = 200;
+const drawerWidth = 170;
 
 const useStyles = makeStyles({
   drawer: {
@@ -25,12 +21,15 @@ const useStyles = makeStyles({
   drawerPaper: {
     width: drawerWidth,
     background: 'none',
-    color: '#fff'
+    color: '#CFD8DC'
   },
   content: {
     flexGrow: 1,
     marginLeft: drawerWidth
   },
+  container: {
+    paddingTop: '16px'
+  }
 });
 
 export const Dashboard: NextPage = ({ children }) => {
@@ -39,13 +38,7 @@ export const Dashboard: NextPage = ({ children }) => {
   return (
     <div>
       <CssBaseline />
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <Typography component="h1" variant="h6" color="inherit" noWrap>
-            Dashboard
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header drawerWidth={drawerWidth} />
       <Drawer
         variant="permanent"
         classes={{
@@ -57,8 +50,8 @@ export const Dashboard: NextPage = ({ children }) => {
         </List>
       </Drawer>
       <main className={classes.content}>
-        <Container>
-          <div className="">{children}</div>
+        <Container maxWidth={false}>
+          <div className={classes.container}>{children}</div>
         </Container>
       </main>
     </div>
