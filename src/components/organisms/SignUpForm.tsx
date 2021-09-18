@@ -8,7 +8,7 @@ const SignUpFormView = styled.form`
   padding: 24px;
   border-radius: 8px;
   width: 400px;
-  background: #fff;
+  background: #263238;
   box-shadow: 5px 17px 40px -15px #00335d2e;
   h2 {
     text-align: center;

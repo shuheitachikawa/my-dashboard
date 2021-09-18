@@ -7,7 +7,6 @@ const TopPageView = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #eceff1;
   .container {
     text-align: center;
   }

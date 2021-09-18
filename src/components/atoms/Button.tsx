@@ -23,7 +23,7 @@ const ButtonView = styled.button<Props>`
   color: #333333;
   :hover {
     border: 1px solid #fff;
-    background: #5c93bb2b;
+    background: #CFD8DC;
   }
 `;
 

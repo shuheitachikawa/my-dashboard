@@ -1,4 +1,4 @@
-
+import { NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
 import { SignInForm } from 'components/organisms';
@@ -8,10 +8,9 @@ const SignInPageView = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #eceff1;
 `;
 
-export default function Home() {
+export default function SignIn() {
   return (
     <SignInPageView>
       <SignInForm />

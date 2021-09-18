@@ -1,13 +1,13 @@
 import Head from 'next/head';
 
-export default function Todo() {
+export default function Settings() {
   return (
     <>
       <Head>
         <title>Todo</title>
         <meta name="description" content="Todoです。" />
       </Head>
-      <main>a</main>
+      <main>setting</main>
     </>
   );
 }

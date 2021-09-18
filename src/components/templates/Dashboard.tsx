@@ -1,12 +1,12 @@
-import AppBar from '@material-ui/core/AppBar';
-import Badge from '@material-ui/core/Badge';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import AppBar from '@mui/material/AppBar';
+import Badge from '@mui/material/Badge';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
 import { NextPage } from 'next';
 import React from 'react';
 // import styled from "styled-components";
@@ -14,24 +14,24 @@ import { ListItems } from 'components/organisms';
 
 const drawerWidth = 200;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    drawer: {
-      width: drawerWidth
-    },
-    appBar: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`
-    },
-    drawerPaper: {
-      width: drawerWidth
-    },
-    content: {
-      flexGrow: 1,
-      marginLeft: drawerWidth
-    }
-  })
-);
+const useStyles = makeStyles({
+  drawer: {
+    width: drawerWidth
+  },
+  appBar: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    background: 'none',
+    color: '#fff'
+  },
+  content: {
+    flexGrow: 1,
+    marginLeft: drawerWidth
+  },
+});
 
 export const Dashboard: NextPage = ({ children }) => {
   const classes = useStyles();

@@ -1,9 +1,9 @@
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Check from '@material-ui/icons/Check';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import PeopleIcon from '@material-ui/icons/People';
+import Check from '@mui/icons-material/Check';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import PeopleIcon from '@mui/icons-material/People';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -36,14 +36,14 @@ export const ListItems: React.FC = () => {
     <div>
       {menus.map((menu) => {
         return (
-          <ListItem key={menu.name} button>
-            <Link href={menu.href}>
+          <Link key={menu.name} passHref={true} href={menu.href}>
+            <ListItem button>
               <>
                 <ListItemIcon>{menu.icon}</ListItemIcon>
                 <ListItemText primary={menu.name} />
               </>
-            </Link>
-          </ListItem>
+            </ListItem>
+          </Link>
         );
       })}
       <ListItem button onClick={handleSignOut}>
