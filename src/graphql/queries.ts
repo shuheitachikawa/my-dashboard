@@ -6,7 +6,6 @@ export const getTodoGroup = /* GraphQL */ `
   query GetTodoGroup($id: ID!) {
     getTodoGroup(id: $id) {
       id
-      userId
       todos {
         title
         text
@@ -20,6 +19,7 @@ export const getTodoGroup = /* GraphQL */ `
       createdAt
       updatedAt
       handleUpdatedAt
+      owner
     }
   }
 `;
@@ -32,7 +32,6 @@ export const listTodoGroups = /* GraphQL */ `
     listTodoGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        userId
         todos {
           title
           text
@@ -46,6 +45,7 @@ export const listTodoGroups = /* GraphQL */ `
         createdAt
         updatedAt
         handleUpdatedAt
+        owner
       }
       nextToken
     }

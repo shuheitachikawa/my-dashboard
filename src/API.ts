@@ -4,7 +4,6 @@
 
 export type CreateTodoGroupInput = {
   id?: string | null,
-  userId: string,
   todos: Array< TodoInput | null >,
   name: string,
   createdAt?: string | null,
@@ -29,7 +28,6 @@ export enum TodoStatus {
 
 
 export type ModelTodoGroupConditionInput = {
-  userId?: ModelIDInput | null,
   name?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
@@ -39,7 +37,7 @@ export type ModelTodoGroupConditionInput = {
   not?: ModelTodoGroupConditionInput | null,
 };
 
-export type ModelIDInput = {
+export type ModelStringInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -79,31 +77,15 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
 export type TodoGroup = {
   __typename: "TodoGroup",
   id: string,
-  userId: string,
   todos:  Array<Todo | null >,
   name: string,
   createdAt: string,
   updatedAt?: string | null,
   handleUpdatedAt?: string | null,
+  owner?: string | null,
 };
 
 export type Todo = {
@@ -119,7 +101,6 @@ export type Todo = {
 
 export type UpdateTodoGroupInput = {
   id: string,
-  userId?: string | null,
   todos?: Array< TodoInput | null > | null,
   name?: string | null,
   createdAt?: string | null,
@@ -133,7 +114,6 @@ export type DeleteTodoGroupInput = {
 
 export type ModelTodoGroupFilterInput = {
   id?: ModelIDInput | null,
-  userId?: ModelIDInput | null,
   name?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
@@ -141,6 +121,22 @@ export type ModelTodoGroupFilterInput = {
   and?: Array< ModelTodoGroupFilterInput | null > | null,
   or?: Array< ModelTodoGroupFilterInput | null > | null,
   not?: ModelTodoGroupFilterInput | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type ModelTodoGroupConnection = {
@@ -158,7 +154,6 @@ export type CreateTodoGroupMutation = {
   createTodoGroup?:  {
     __typename: "TodoGroup",
     id: string,
-    userId: string,
     todos:  Array< {
       __typename: "Todo",
       title: string,
@@ -173,6 +168,7 @@ export type CreateTodoGroupMutation = {
     createdAt: string,
     updatedAt?: string | null,
     handleUpdatedAt?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -185,7 +181,6 @@ export type UpdateTodoGroupMutation = {
   updateTodoGroup?:  {
     __typename: "TodoGroup",
     id: string,
-    userId: string,
     todos:  Array< {
       __typename: "Todo",
       title: string,
@@ -200,6 +195,7 @@ export type UpdateTodoGroupMutation = {
     createdAt: string,
     updatedAt?: string | null,
     handleUpdatedAt?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -212,7 +208,6 @@ export type DeleteTodoGroupMutation = {
   deleteTodoGroup?:  {
     __typename: "TodoGroup",
     id: string,
-    userId: string,
     todos:  Array< {
       __typename: "Todo",
       title: string,
@@ -227,6 +222,7 @@ export type DeleteTodoGroupMutation = {
     createdAt: string,
     updatedAt?: string | null,
     handleUpdatedAt?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -238,7 +234,6 @@ export type GetTodoGroupQuery = {
   getTodoGroup?:  {
     __typename: "TodoGroup",
     id: string,
-    userId: string,
     todos:  Array< {
       __typename: "Todo",
       title: string,
@@ -253,6 +248,7 @@ export type GetTodoGroupQuery = {
     createdAt: string,
     updatedAt?: string | null,
     handleUpdatedAt?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -268,7 +264,6 @@ export type ListTodoGroupsQuery = {
     items?:  Array< {
       __typename: "TodoGroup",
       id: string,
-      userId: string,
       todos:  Array< {
         __typename: "Todo",
         title: string,
@@ -283,16 +278,20 @@ export type ListTodoGroupsQuery = {
       createdAt: string,
       updatedAt?: string | null,
       handleUpdatedAt?: string | null,
+      owner?: string | null,
     } | null > | null,
     nextToken?: string | null,
   } | null,
+};
+
+export type OnCreateTodoGroupSubscriptionVariables = {
+  owner: string,
 };
 
 export type OnCreateTodoGroupSubscription = {
   onCreateTodoGroup?:  {
     __typename: "TodoGroup",
     id: string,
-    userId: string,
     todos:  Array< {
       __typename: "Todo",
       title: string,
@@ -307,14 +306,18 @@ export type OnCreateTodoGroupSubscription = {
     createdAt: string,
     updatedAt?: string | null,
     handleUpdatedAt?: string | null,
+    owner?: string | null,
   } | null,
+};
+
+export type OnUpdateTodoGroupSubscriptionVariables = {
+  owner: string,
 };
 
 export type OnUpdateTodoGroupSubscription = {
   onUpdateTodoGroup?:  {
     __typename: "TodoGroup",
     id: string,
-    userId: string,
     todos:  Array< {
       __typename: "Todo",
       title: string,
@@ -329,14 +332,18 @@ export type OnUpdateTodoGroupSubscription = {
     createdAt: string,
     updatedAt?: string | null,
     handleUpdatedAt?: string | null,
+    owner?: string | null,
   } | null,
+};
+
+export type OnDeleteTodoGroupSubscriptionVariables = {
+  owner: string,
 };
 
 export type OnDeleteTodoGroupSubscription = {
   onDeleteTodoGroup?:  {
     __typename: "TodoGroup",
     id: string,
-    userId: string,
     todos:  Array< {
       __typename: "Todo",
       title: string,
@@ -351,5 +358,6 @@ export type OnDeleteTodoGroupSubscription = {
     createdAt: string,
     updatedAt?: string | null,
     handleUpdatedAt?: string | null,
+    owner?: string | null,
   } | null,
 };

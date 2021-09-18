@@ -8,7 +8,7 @@ interface Props {
 const HeaderView = styled.header<Props>`
   flex-grow: 1;
   margin-left: ${(props) => props.drawerWidth + 'px'};
-  background: #37474F;
+  background: #263238;
   h1 {
     text-align: center;
     font-size: 20px;

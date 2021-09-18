@@ -9,7 +9,6 @@ export const createTodoGroup = /* GraphQL */ `
   ) {
     createTodoGroup(input: $input, condition: $condition) {
       id
-      userId
       todos {
         title
         text
@@ -23,6 +22,7 @@ export const createTodoGroup = /* GraphQL */ `
       createdAt
       updatedAt
       handleUpdatedAt
+      owner
     }
   }
 `;
@@ -33,7 +33,6 @@ export const updateTodoGroup = /* GraphQL */ `
   ) {
     updateTodoGroup(input: $input, condition: $condition) {
       id
-      userId
       todos {
         title
         text
@@ -47,6 +46,7 @@ export const updateTodoGroup = /* GraphQL */ `
       createdAt
       updatedAt
       handleUpdatedAt
+      owner
     }
   }
 `;
@@ -57,7 +57,6 @@ export const deleteTodoGroup = /* GraphQL */ `
   ) {
     deleteTodoGroup(input: $input, condition: $condition) {
       id
-      userId
       todos {
         title
         text
@@ -71,6 +70,7 @@ export const deleteTodoGroup = /* GraphQL */ `
       createdAt
       updatedAt
       handleUpdatedAt
+      owner
     }
   }
 `;

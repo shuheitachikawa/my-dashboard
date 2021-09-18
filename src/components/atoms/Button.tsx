@@ -18,11 +18,11 @@ const ButtonView = styled.button<Props>`
   padding: ${(props) => (props.small ? '0.4em 0.6em' : '0.6em 0.7em')};
   font-size: ${(props) => (props.small ? '14px' : '15px')};
   border-radius: ${(props) => (props.small ? '4px' : '6px')};
+  font-weight: ${(props) => (props.small ? '400' : '600')};
   border: none;
   outline: none;
   cursor: pointer;
   transition: 0.3s;
-  font-weight: 600;
   :hover {
     background: #37474F;
   }

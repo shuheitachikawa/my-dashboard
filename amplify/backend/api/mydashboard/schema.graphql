@@ -1,6 +1,8 @@
-type TodoGroup @model {
+type TodoGroup
+  @model
+  @auth(rules: [{allow: owner, ownerField: "owner", operations: [read, create, update, delete]}])
+{
   id: ID!
-  userId: ID!
   todos: [Todo]!
   name: String!
   createdAt: AWSDateTime!

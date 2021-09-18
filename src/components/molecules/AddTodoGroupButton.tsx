@@ -1,12 +1,15 @@
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
+import { API } from 'aws-amplify';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { CreateTodoGroupInput } from 'API';
 import { TextField, Button } from 'components/atoms';
+import { createTodoGroup } from 'graphql/mutations';
 
 const AddTodoGroupButtonView = styled.div`
   width: 320px;
-  background: #37474f;
+  background: #263238;
   padding: 8px;
   border-radius: 4px;
   .button {
@@ -39,10 +42,24 @@ export const AddTodoGroupButton: React.FC = () => {
     setGroupName('');
   };
 
-  const handleCreateGroup = (e: React.MouseEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    console.log(groupName)
-  }
+  const handleCreateGroup = async (e: React.MouseEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!groupName) return;
+    try {
+      const input: CreateTodoGroupInput = {
+        todos: [],
+        name: groupName
+      };
+      await API.graphql({
+        query: createTodoGroup,
+        variables: { input }
+      });
+      setShowInput(false);
+      setGroupName('');
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <AddTodoGroupButtonView className="">
@@ -52,7 +69,7 @@ export const AddTodoGroupButton: React.FC = () => {
             value={groupName}
             block
             dark
-            placeholder='リストの名前'
+            placeholder="リストの名前"
             onChange={(e) => setGroupName(e.target.value)}
           />
           <div className="button-area">

@@ -3,10 +3,9 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateTodoGroup = /* GraphQL */ `
-  subscription OnCreateTodoGroup {
-    onCreateTodoGroup {
+  subscription OnCreateTodoGroup($owner: String!) {
+    onCreateTodoGroup(owner: $owner) {
       id
-      userId
       todos {
         title
         text
@@ -20,14 +19,14 @@ export const onCreateTodoGroup = /* GraphQL */ `
       createdAt
       updatedAt
       handleUpdatedAt
+      owner
     }
   }
 `;
 export const onUpdateTodoGroup = /* GraphQL */ `
-  subscription OnUpdateTodoGroup {
-    onUpdateTodoGroup {
+  subscription OnUpdateTodoGroup($owner: String!) {
+    onUpdateTodoGroup(owner: $owner) {
       id
-      userId
       todos {
         title
         text
@@ -41,14 +40,14 @@ export const onUpdateTodoGroup = /* GraphQL */ `
       createdAt
       updatedAt
       handleUpdatedAt
+      owner
     }
   }
 `;
 export const onDeleteTodoGroup = /* GraphQL */ `
-  subscription OnDeleteTodoGroup {
-    onDeleteTodoGroup {
+  subscription OnDeleteTodoGroup($owner: String!) {
+    onDeleteTodoGroup(owner: $owner) {
       id
-      userId
       todos {
         title
         text
@@ -62,6 +61,7 @@ export const onDeleteTodoGroup = /* GraphQL */ `
       createdAt
       updatedAt
       handleUpdatedAt
+      owner
     }
   }
 `;
