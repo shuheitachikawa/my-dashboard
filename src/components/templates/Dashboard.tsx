@@ -5,12 +5,17 @@ import List from '@mui/material/List';
 import { makeStyles } from '@mui/styles';
 import { NextPage } from 'next';
 import React from 'react';
-// import styled from "styled-components";
 import { ListItems, Header } from 'components/organisms';
 
 const drawerWidth = 170;
+// なぜか初回ログイン時だけglobals.cssの以下スタイルが当たらないためここでも明示。
+const fontColor = '#CFD8DC'
+const backgroundColor = '#455A64'
 
 const useStyles = makeStyles({
+  dashboard: {
+    color: fontColor
+  },
   drawer: {
     width: drawerWidth
   },
@@ -20,15 +25,19 @@ const useStyles = makeStyles({
   },
   drawerPaper: {
     width: drawerWidth,
-    background: 'none',
-    color: '#CFD8DC'
+    background: backgroundColor,
+    color: fontColor
+  },
+  list: {
+    background: backgroundColor
   },
   content: {
     flexGrow: 1,
     marginLeft: drawerWidth
   },
   container: {
-    paddingTop: '16px'
+    paddingTop: '16px',
+    background: backgroundColor
   }
 });
 
@@ -36,7 +45,7 @@ export const Dashboard: NextPage = ({ children }) => {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className={classes.dashboard}>
       <CssBaseline />
       <Header drawerWidth={drawerWidth} />
       <Drawer
@@ -45,13 +54,13 @@ export const Dashboard: NextPage = ({ children }) => {
           paper: classes.drawerPaper
         }}
       >
-        <List>
+        <List className={classes.list}>
           <ListItems />
         </List>
       </Drawer>
       <main className={classes.content}>
-        <Container maxWidth={false}>
-          <div className={classes.container}>{children}</div>
+        <Container maxWidth={false} className={classes.container}>
+          <div>{children}</div>
         </Container>
       </main>
     </div>
