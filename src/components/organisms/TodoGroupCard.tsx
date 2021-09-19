@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { TodoGroup } from 'API';
 
-interface Props<T> {
-  todoGroup: T;
+interface Props {
+  todoGroup: TodoGroup;
 }
 
 // const HeaderView = styled.header<Props>`
@@ -19,7 +20,7 @@ interface Props<T> {
 //   }
 // `;
 
-export const TodoGroupCard: React.FC<Props<T>> = ({ todoGroup }) => {
+export const TodoGroupCard: React.FC<Props> = ({ todoGroup }) => {
   return (
     <div>
       {todoGroup.name}
