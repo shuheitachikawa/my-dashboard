@@ -7,6 +7,7 @@ interface Props {
   block?: boolean;
   placeholder?: string;
   dark?: boolean;
+  reference?: React.MutableRefObject<null | HTMLInputElement>
   onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -30,10 +31,12 @@ export const TextField: React.FC<Props> = ({
   block = false,
   dark = true,
   placeholder,
+  reference,
   onChange
 }) => {
   return (
     <TextFieldView
+      ref={reference}
       value={value}
       type={type}
       block={block}

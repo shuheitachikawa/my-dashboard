@@ -19,7 +19,12 @@ const TodoGroupCardView = styled.div<{ cardWidth: string }>`
 export const TodoGroupCard: React.FC<Props> = ({ todoGroup, cardWidth }) => {
   return (
     <TodoGroupCardView cardWidth={cardWidth}>
-      {todoGroup.name}
+      <p>{todoGroup.name}</p>
+      <ul>
+        {todoGroup.todos.map((todo, i) => {
+          return <li key={`todo-${i}`}>{todo.title}</li>;
+        })}
+      </ul>
     </TodoGroupCardView>
   );
 };

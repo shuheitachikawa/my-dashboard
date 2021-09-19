@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { TodoGroup } from 'API';
 import { AddTodoGroupButton } from 'components/molecules';
@@ -17,6 +17,7 @@ export default function Todo() {
   const [showNewTodoGroupInput, setShowNewTodoGroupInput] = useState(false);
   const [groupName, setGroupName] = useState('');
   const cardWidth = '240px';
+  const titleInput = useRef<null | HTMLInputElement>(null);
 
   /**
    * Group作成フォームを開く
@@ -24,6 +25,11 @@ export default function Todo() {
   const openGroupCreateForm = () => {
     setShowNewTodoGroupInput(true);
   };
+
+  // Group作成フォームRender後にInputにフォーカス当てる
+  useEffect(() => {
+    titleInput.current?.focus();
+  }, [showNewTodoGroupInput])
 
   /**
    * Group作成フォームを閉じる
@@ -83,6 +89,7 @@ export default function Todo() {
         <AddTodoGroupButton
           groupName={groupName}
           showNewTodoGroupInput={showNewTodoGroupInput}
+          titleInput={titleInput}
           setGroupName={setGroupName}
           openForm={openGroupCreateForm}
           closeForm={closeGroupCreateForm}

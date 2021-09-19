@@ -34,6 +34,7 @@ interface Props {
   groupName: string;
   showNewTodoGroupInput: boolean;
   cardWidth: string;
+  titleInput: React.MutableRefObject<null | HTMLInputElement>
   setGroupName: (value: string) => void;
   closeForm: () => void;
   openForm: () => void;
@@ -44,6 +45,7 @@ export const AddTodoGroupButton: React.FC<Props> = ({
   groupName,
   showNewTodoGroupInput,
   cardWidth,
+  titleInput,
   setGroupName,
   openForm,
   closeForm,
@@ -54,6 +56,7 @@ export const AddTodoGroupButton: React.FC<Props> = ({
       {showNewTodoGroupInput ? (
         <form className="input-area" onSubmit={handleCreateGroup}>
           <TextField
+            reference={titleInput}
             value={groupName}
             block
             dark
