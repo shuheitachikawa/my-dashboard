@@ -2,21 +2,19 @@ import { API } from 'aws-amplify';
 
 type graphql = string;
 
-type Response<T> = {
-  data: T
-}
-
 export default class GqlBaseModel {
   constructor() {}
 
-  public static async createModel<Input>(input: Input, query: graphql) {
+  public static async createModel<Input, Response>(input: Input, query: graphql): Promise<Response> {
     try {
-      await API.graphql({
+      const data: any = await API.graphql({
         query,
         variables: { input }
       });
+      if (!data.data) throw new Error('fetch error');
+      return data.data
     } catch (e) {
-      throw new Error((e as any).message)
+      throw new Error((e as any).message);
     }
   }
 
@@ -25,11 +23,11 @@ export default class GqlBaseModel {
       const data: any = await API.graphql({
         query
       });
-      if (!data.data) throw new Error('fetch error')
+      if (!data.data) throw new Error('fetch error');
       return data.data;
     } catch (e) {
-      console.error(e)
-      throw new Error((e as any).message)
+      console.error(e);
+      throw new Error((e as any).message);
     }
   }
 }

@@ -1,12 +1,11 @@
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { TextField, Button } from 'components/atoms';
-import { TodoGroupModel } from 'models'
 
-const AddTodoGroupButtonView = styled.div`
-  width: 320px;
+const AddTodoGroupButtonView = styled.div<{ cardWidth: string }>`
+  width: ${(props) => props.cardWidth};
   background: #263238;
   padding: 8px;
   border-radius: 4px;
@@ -31,39 +30,28 @@ const AddTodoGroupButtonView = styled.div`
   }
 `;
 
-export const AddTodoGroupButton: React.FC = () => {
-  const [showInput, setShowInput] = useState(false);
-  const [groupName, setGroupName] = useState('');
+interface Props {
+  groupName: string;
+  showNewTodoGroupInput: boolean;
+  cardWidth: string;
+  setGroupName: (value: string) => void;
+  closeForm: () => void;
+  openForm: () => void;
+  handleCreateGroup: (event: React.MouseEvent<HTMLFormElement>) => void;
+}
 
-  const openForm = () => {
-    setShowInput(true);
-    
-  }
-
-  const closeForm = () => {
-    setShowInput(false);
-    setGroupName('');
-  };
-
-  const handleCreateGroup = async (e: React.MouseEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!groupName) return;
-    try {
-      const input = {
-        todos: [],
-        name: groupName
-      };
-      await TodoGroupModel.create(input);
-      setShowInput(false);
-      setGroupName('');
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
+export const AddTodoGroupButton: React.FC<Props> = ({
+  groupName,
+  showNewTodoGroupInput,
+  cardWidth,
+  setGroupName,
+  openForm,
+  closeForm,
+  handleCreateGroup
+}) => {
   return (
-    <AddTodoGroupButtonView className="">
-      {showInput ? (
+    <AddTodoGroupButtonView cardWidth={cardWidth}>
+      {showNewTodoGroupInput ? (
         <form className="input-area" onSubmit={handleCreateGroup}>
           <TextField
             value={groupName}

@@ -4,26 +4,22 @@ import { TodoGroup } from 'API';
 
 interface Props {
   todoGroup: TodoGroup;
+  cardWidth: string;
 }
 
-// const HeaderView = styled.header<Props>`
-//   flex-grow: 1;
-//   margin-left: ${(props) => props.drawerWidth + 'px'};
-//   background: #263238;
-//   h1 {
-//     text-align: center;
-//     font-size: 20px;
-//     margin: 0;
-//     padding: 4px 0;
-//     font-weight: 600;
-//     user-select: none;
-//   }
-// `;
+const TodoGroupCardView = styled.div<{ cardWidth: string }>`
+  width: ${(props) => props.cardWidth};
+  background: #263238;
+  padding: 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  margin-bottom: 24px;
+`;
 
-export const TodoGroupCard: React.FC<Props> = ({ todoGroup }) => {
+export const TodoGroupCard: React.FC<Props> = ({ todoGroup, cardWidth }) => {
   return (
-    <div>
+    <TodoGroupCardView cardWidth={cardWidth}>
       {todoGroup.name}
-    </div>
+    </TodoGroupCardView>
   );
 };
