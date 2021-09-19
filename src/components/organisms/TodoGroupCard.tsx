@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TodoGroup } from 'API';
+import { TextField } from 'components/atoms';
 
 interface Props {
   todoGroup: TodoGroup;
   cardWidth: string;
+  newTodoTitle: string;
+  onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TodoGroupCardView = styled.div<{ cardWidth: string }>`
@@ -16,7 +19,12 @@ const TodoGroupCardView = styled.div<{ cardWidth: string }>`
   margin-bottom: 24px;
 `;
 
-export const TodoGroupCard: React.FC<Props> = ({ todoGroup, cardWidth }) => {
+export const TodoGroupCard: React.FC<Props> = ({
+  todoGroup,
+  cardWidth,
+  newTodoTitle,
+  onChange
+}) => {
   return (
     <TodoGroupCardView cardWidth={cardWidth}>
       <p>{todoGroup.name}</p>
@@ -25,6 +33,7 @@ export const TodoGroupCard: React.FC<Props> = ({ todoGroup, cardWidth }) => {
           return <li key={`todo-${i}`}>{todo.title}</li>;
         })}
       </ul>
+      <TextField value={newTodoTitle} onChange={onChange} block />
     </TodoGroupCardView>
   );
 };

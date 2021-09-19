@@ -16,6 +16,7 @@ export default function Todo() {
   const [todoGroups, setTodoGroups] = useState<TodoGroup[]>([]);
   const [showNewTodoGroupInput, setShowNewTodoGroupInput] = useState(false);
   const [groupName, setGroupName] = useState('');
+  const [newTodoTitle, setNewTodoTitle] = useState('');
   const cardWidth = '240px';
   const titleInput = useRef<null | HTMLInputElement>(null);
 
@@ -83,6 +84,8 @@ export default function Todo() {
               key={`todoGroup-${i}`}
               todoGroup={todoGroup}
               cardWidth={cardWidth}
+              newTodoTitle={newTodoTitle}
+              onChange={(e) =>　setNewTodoTitle(e.target.value)}
             />
           );
         })}
