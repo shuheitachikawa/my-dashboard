@@ -1,3 +1,3 @@
-import TodoGroup from "./TodoGroup";
+import TodoGroupModel from "./TodoGroupModel";
 
-export { TodoGroup };
+export { TodoGroupModel };

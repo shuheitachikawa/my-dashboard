@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { TextField, Button } from 'components/atoms';
-import { TodoGroup } from 'models'
+import { TodoGroupModel } from 'models'
 
 const AddTodoGroupButtonView = styled.div`
   width: 320px;
@@ -53,7 +53,7 @@ export const AddTodoGroupButton: React.FC = () => {
         todos: [],
         name: groupName
       };
-      await TodoGroup.create(input);
+      await TodoGroupModel.create(input);
       setShowInput(false);
       setGroupName('');
     } catch (e) {
