@@ -1,11 +1,9 @@
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
-import { API } from 'aws-amplify';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { CreateTodoGroupInput } from 'API';
 import { TextField, Button } from 'components/atoms';
-import { createTodoGroup } from 'graphql/mutations';
+import { TodoGroup } from 'models'
 
 const AddTodoGroupButtonView = styled.div`
   width: 320px;
@@ -37,6 +35,11 @@ export const AddTodoGroupButton: React.FC = () => {
   const [showInput, setShowInput] = useState(false);
   const [groupName, setGroupName] = useState('');
 
+  const openForm = () => {
+    setShowInput(true);
+    
+  }
+
   const closeForm = () => {
     setShowInput(false);
     setGroupName('');
@@ -46,14 +49,11 @@ export const AddTodoGroupButton: React.FC = () => {
     e.preventDefault();
     if (!groupName) return;
     try {
-      const input: CreateTodoGroupInput = {
+      const input = {
         todos: [],
         name: groupName
       };
-      await API.graphql({
-        query: createTodoGroup,
-        variables: { input }
-      });
+      await TodoGroup.create(input);
       setShowInput(false);
       setGroupName('');
     } catch (e) {
@@ -78,7 +78,7 @@ export const AddTodoGroupButton: React.FC = () => {
           </div>
         </form>
       ) : (
-        <div className="button" onClick={() => setShowInput(true)}>
+        <div className="button" onClick={openForm}>
           <AddIcon />
           <span>リストを追加</span>
         </div>
