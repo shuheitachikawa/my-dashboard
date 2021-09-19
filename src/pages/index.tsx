@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
+import { sums } from '../../wasm/pkg/wasm_bg.wasm';
 
 const TopPageView = styled.div`
   height: 100vh;
@@ -20,6 +21,9 @@ const TopPageView = styled.div`
     border: none;
   }
 `;
+
+console.log(sums(6));
+console.log(232323);
 
 export default function Home() {
   const router = useRouter();
