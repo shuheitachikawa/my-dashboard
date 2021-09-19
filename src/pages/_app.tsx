@@ -1,7 +1,6 @@
 import '../styles/globals.css';
 import { ThemeProvider as MaterialThemeProvider } from '@mui/material/styles';
 import { Amplify, Auth } from 'aws-amplify';
-import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -17,7 +16,7 @@ Amplify.configure({ ...awsExports, ssr: true });
 // ログイン無しでしか見れないページ
 const withoutSignInPaths = ['/', '/signup', '/signin'];
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const notNeedSignInPage = withoutSignInPaths.includes(router.pathname);
 
@@ -81,4 +80,3 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   );
 }
-export default MyApp;
