@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Button, TextField } from 'components/atoms';
+import { Button, TextField } from 'components/parts';
 
 const SignInFormView = styled.form`
   padding: 24px;

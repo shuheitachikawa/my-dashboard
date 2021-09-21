@@ -5,7 +5,7 @@ import List from '@mui/material/List';
 import { makeStyles } from '@mui/styles';
 import { NextPage } from 'next';
 import React from 'react';
-import { ListItems, Header } from 'components/organisms';
+import { ListItems, Header } from 'components/parts';
 
 const drawerWidth = 170;
 // なぜか初回ログイン時だけglobals.cssの以下スタイルが当たらないためここでも明示。

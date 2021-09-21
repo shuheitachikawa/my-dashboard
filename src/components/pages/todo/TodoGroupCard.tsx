@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TodoGroup } from 'API';
-import { TextField } from 'components/atoms';
+import { TextField } from 'components/parts';
 
 interface Props {
   todoGroup: TodoGroup;

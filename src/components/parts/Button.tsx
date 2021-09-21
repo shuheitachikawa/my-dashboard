@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Loader } from 'components/atoms';
+import { Loader } from 'components/parts';
 
 interface Props {
   type?: 'submit' | 'button';

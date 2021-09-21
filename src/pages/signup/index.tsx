@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SignUpForm } from 'components/organisms';
+import { SignUpForm } from 'components/pages/signUp/SignUpForm';
 
 const SignUpPageView = styled.div`
   height: 100vh;

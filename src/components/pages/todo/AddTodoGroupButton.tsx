@@ -2,7 +2,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import React from 'react';
 import styled from 'styled-components';
-import { TextField, Button } from 'components/atoms';
+import { TextField, Button } from 'components/parts';
 
 const AddTodoGroupButtonView = styled.div<{ cardWidth: string }>`
   width: ${(props) => props.cardWidth};

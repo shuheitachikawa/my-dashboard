@@ -8,7 +8,7 @@ import { useSetRecoilState, RecoilRoot } from 'recoil';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { theme } from '../styles/theme';
 import awsExports from 'aws-exports';
-import { Dashboard } from 'components/templates';
+import { Dashboard } from 'components/parts';
 import { currentUserState } from 'states/user';
 
 Amplify.configure({ ...awsExports, ssr: true });

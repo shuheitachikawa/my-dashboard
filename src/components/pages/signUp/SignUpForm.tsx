@@ -2,7 +2,7 @@ import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Button, TextField } from 'components/atoms';
+import { Button, TextField } from 'components/parts';
 
 const SignUpFormView = styled.form`
   padding: 24px;

@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
-import { SignInForm } from 'components/organisms';
+import { SignInForm } from 'components/pages/signIn/SignInForm';
 
 const SignInPageView = styled.div`
   height: 100vh;

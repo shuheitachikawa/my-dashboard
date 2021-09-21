@@ -2,8 +2,7 @@ import Head from 'next/head';
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { TodoGroup } from 'API';
-import { AddTodoGroupButton } from 'components/molecules';
-import { TodoGroupCard } from 'components/organisms';
+import { AddTodoGroupButton, TodoGroupCard } from 'components/pages/todo';
 import { TodoGroupModel } from 'models';
 
 const TodoPageView = styled.div`
@@ -30,7 +29,7 @@ export default function Todo() {
   // Group作成フォームRender後にInputにフォーカス当てる
   useEffect(() => {
     titleInput.current?.focus();
-  }, [showNewTodoGroupInput])
+  }, [showNewTodoGroupInput]);
 
   /**
    * Group作成フォームを閉じる
@@ -85,7 +84,7 @@ export default function Todo() {
               todoGroup={todoGroup}
               cardWidth={cardWidth}
               newTodoTitle={newTodoTitle}
-              onChange={(e) =>　setNewTodoTitle(e.target.value)}
+              onChange={(e) => setNewTodoTitle(e.target.value)}
             />
           );
         })}
