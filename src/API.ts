@@ -22,8 +22,8 @@ export type TodoInput = {
 };
 
 export enum TodoStatus {
-  doing = "doing",
-  done = "done",
+  DOING = "DOING",
+  DONE = "DONE",
 }
 
 

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { TodoGroup } from 'API';
+import { TodoGroup, UpdateTodoGroupInput, TodoInput, TodoStatus } from 'API';
 import { AddTodoGroupButton, TodoGroupCard } from 'components/pages/todo';
 import { TodoGroupModel } from 'models';
 
@@ -15,9 +15,19 @@ export default function Todo() {
   const [todoGroups, setTodoGroups] = useState<TodoGroup[]>([]);
   const [showNewTodoGroupInput, setShowNewTodoGroupInput] = useState(false);
   const [groupName, setGroupName] = useState('');
-  const [newTodoTitle, setNewTodoTitle] = useState('');
   const cardWidth = '240px';
   const titleInput = useRef<null | HTMLInputElement>(null);
+
+  /**
+   * TodoGroup一覧取得
+   */
+  useEffect(() => {
+    const fetchTodoGroups = async () => {
+      const data = await TodoGroupModel.index();
+      setTodoGroups(data);
+    };
+    fetchTodoGroups();
+  }, []);
 
   /**
    * Group作成フォームを開く
@@ -54,21 +64,64 @@ export default function Todo() {
       setShowNewTodoGroupInput(false);
       setGroupName('');
       setTodoGroups([...todoGroups, data]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  /**
+   * Todo追加
+   * @param title 新しいTodoタイトル
+   * @param todoGroupId 所属するTodoGroupのID
+   */
+  const handleAddTodo = async (title: string, todoGroupId: string) => {
+    try {
+      // todoGroup取得
+      const todoGroup = todoGroups.find(
+        (todoGroup) => todoGroup.id === todoGroupId
+      );
+      if (!todoGroup) throw new Error('更新エラー');
+
+      // 更新用inputデータ成型
+      const todo: TodoInput = {
+        title,
+        text: '',
+        index: todoGroup.todos.length + 1,
+        status: TodoStatus.DOING,
+        createdAt: new Date().toISOString()
+      };
+      const { id, name, todos } = todoGroup;
+      const input: UpdateTodoGroupInput = {
+        id,
+        name,
+        todos: [...todos, todo]
+      };
+
+      // 更新
+      const data = await TodoGroupModel.update(input);
+      setTodoGroups(
+        todoGroups.map((group) => {
+          return group.id === data.id ? data : group;
+        })
+      );
     } catch (e) {
       console.log(e);
     }
   };
 
   /**
-   * Todo取得
+   * Todo削除
+   * @param todoGroupId TodoGroupID
    */
-  useEffect(() => {
-    const fetchTodoGroups = async () => {
-      const data = await TodoGroupModel.index();
-      setTodoGroups(data);
-    };
-    fetchTodoGroups();
-  }, []);
+  const handleDeleteGroup = async (todoGroupId: string) => {
+    // if (!confirm('削除しますか？')) return;
+    try {
+      await TodoGroupModel.delete(todoGroupId);
+      setTodoGroups(todoGroups.filter((_) => _.id !== todoGroupId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -83,8 +136,8 @@ export default function Todo() {
               key={`todoGroup-${i}`}
               todoGroup={todoGroup}
               cardWidth={cardWidth}
-              newTodoTitle={newTodoTitle}
-              onChange={(e) => setNewTodoTitle(e.target.value)}
+              onAddTodo={handleAddTodo}
+              onDelete={handleDeleteGroup}
             />
           );
         })}
@@ -92,11 +145,11 @@ export default function Todo() {
           groupName={groupName}
           showNewTodoGroupInput={showNewTodoGroupInput}
           titleInput={titleInput}
+          cardWidth={cardWidth}
           setGroupName={setGroupName}
           openForm={openGroupCreateForm}
           closeForm={closeGroupCreateForm}
           handleCreateGroup={handleCreateGroup}
-          cardWidth={cardWidth}
         />
       </TodoPageView>
     </>

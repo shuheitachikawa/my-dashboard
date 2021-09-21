@@ -21,6 +21,6 @@ type Todo {
 }
 
 enum TodoStatus {
-  doing
-  done
+  DOING
+  DONE
 }
