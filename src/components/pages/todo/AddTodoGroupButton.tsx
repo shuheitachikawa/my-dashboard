@@ -4,7 +4,23 @@ import React from 'react';
 import styled from 'styled-components';
 import { TextField, Button } from 'components/parts';
 
-const AddTodoGroupButtonView = styled.div<{ cardWidth: string }>`
+interface StyleProps {
+  cardWidth: string;
+}
+
+interface ComponentProps {
+  groupName: string;
+  showNewTodoGroupInput: boolean;
+  titleInput: React.MutableRefObject<null | HTMLInputElement>
+  setGroupName: (value: string) => void;
+  closeForm: () => void;
+  openForm: () => void;
+  handleCreateGroup: (event: React.MouseEvent<HTMLFormElement>) => void;
+}
+
+type Props = StyleProps & ComponentProps;
+
+const AddTodoGroupButtonView = styled.div<StyleProps>`
   width: ${(props) => props.cardWidth};
   background: #263238;
   padding: 8px;
@@ -29,17 +45,6 @@ const AddTodoGroupButtonView = styled.div<{ cardWidth: string }>`
     }
   }
 `;
-
-interface Props {
-  groupName: string;
-  showNewTodoGroupInput: boolean;
-  cardWidth: string;
-  titleInput: React.MutableRefObject<null | HTMLInputElement>
-  setGroupName: (value: string) => void;
-  closeForm: () => void;
-  openForm: () => void;
-  handleCreateGroup: (event: React.MouseEvent<HTMLFormElement>) => void;
-}
 
 export const AddTodoGroupButton: React.FC<Props> = ({
   groupName,

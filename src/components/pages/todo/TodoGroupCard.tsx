@@ -5,14 +5,19 @@ import styled from 'styled-components';
 import { TodoGroup } from 'API';
 import { TextField } from 'components/parts';
 
-interface Props {
-  todoGroup: TodoGroup;
+interface StyleProps {
   cardWidth: string;
+}
+
+interface ComponentProps {
+  todoGroup: TodoGroup;
   onAddTodo: (title: string, todoGroupId: string) => void;
   onDelete: (todoGroupId: string) => void;
 }
 
-const TodoGroupCardView = styled.div<{ cardWidth: string }>`
+type Props = StyleProps & ComponentProps;
+
+const TodoGroupCardView = styled.div<StyleProps>`
   width: ${(props) => props.cardWidth};
   background: #263238;
   padding: 8px;

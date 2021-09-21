@@ -2,16 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { Loader } from 'components/parts';
 
-interface Props {
-  type?: 'submit' | 'button';
-  block?: boolean;
-  loading?: boolean;
-  disabled?: boolean;
-  dark?: boolean;
+interface StyleProps {
   small?: boolean;
+  dark?: boolean;
+  block?: boolean;
 }
 
-const ButtonView = styled.button<Props>`
+interface ComponentProps {
+  type?: 'submit' | 'button';
+  loading?: boolean;
+  disabled?: boolean;
+}
+
+type Props = StyleProps & ComponentProps;
+
+const ButtonView = styled.button<StyleProps>`
   width: ${(props) => (props.block ? '100%' : 'auto')};
   background: ${(props) => (props.dark ? '#455A64' : '#f1f5f9')};
   color: ${(props) => (props.dark ? '#fff' : '#333333')};
@@ -24,7 +29,7 @@ const ButtonView = styled.button<Props>`
   cursor: pointer;
   transition: 0.3s;
   :hover {
-    background: #37474F;
+    background: #37474f;
   }
 `;
 
@@ -38,7 +43,13 @@ export const Button: React.FC<Props> = ({
   children
 }) => {
   return (
-    <ButtonView type={type} block={block} disabled={disabled} dark={dark} small={small}>
+    <ButtonView
+      type={type}
+      block={block}
+      disabled={disabled}
+      dark={dark}
+      small={small}
+    >
       {loading ? <Loader /> : children}
     </ButtonView>
   );

@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props {
+interface StyleProps {
   drawerWidth: number;
 }
 
-const HeaderView = styled.header<Props>`
+type Props = StyleProps;
+
+const HeaderView = styled.header<StyleProps>`
   flex-grow: 1;
   margin-left: ${(props) => props.drawerWidth + 'px'};
   background: #263238;

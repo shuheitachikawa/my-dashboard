@@ -1,17 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props {
+interface StyleProps {
+  block?: boolean;
+  dark?: boolean;
+}
+
+interface ComponentProps {
   value: string | number;
   type?: 'text' | 'number' | 'password' | 'email';
-  block?: boolean;
   placeholder?: string;
-  dark?: boolean;
   reference?: React.MutableRefObject<null | HTMLInputElement>
   onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TextFieldView = styled.input<Props>`
+type Props = StyleProps & ComponentProps
+
+const TextFieldView = styled.input<StyleProps>`
   width: ${(props) => (props.block ? '100%' : 'auto')};
   background: ${(props) => (props.dark ? '#455A64' : '#f1f5f9')};
   color: ${(props) => (props.dark ? '#fff' : '#333333')};
