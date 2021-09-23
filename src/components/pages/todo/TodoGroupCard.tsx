@@ -2,7 +2,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { TodoGroup } from 'API';
+import { TodoGroup, Todo } from 'API';
 import { TextField } from 'components/parts';
 
 interface StyleProps {
@@ -13,6 +13,7 @@ interface ComponentProps {
   todoGroup: TodoGroup;
   onAddTodo: (title: string, todoGroupId: string) => void;
   onDelete: (todoGroupId: string) => void;
+  onDoneTodo: (todoGroupId: string, todoIndex: number) => void;
 }
 
 type Props = StyleProps & ComponentProps;
@@ -37,7 +38,7 @@ const TodoGroupCardView = styled.div<StyleProps>`
       cursor: pointer;
     }
   }
-  ul {
+  .doing-todos {
     margin: 0;
     padding: 0;
     li {
@@ -66,7 +67,8 @@ export const TodoGroupCard: React.FC<Props> = ({
   todoGroup,
   cardWidth,
   onAddTodo,
-  onDelete
+  onDelete,
+  onDoneTodo,
 }) => {
   const [newTodoTitle, setNewTodoTitle] = useState('');
 
@@ -80,6 +82,9 @@ export const TodoGroupCard: React.FC<Props> = ({
     setNewTodoTitle('');
   };
 
+  const doingTodos = todoGroup.todos.filter((_) => _.status === 'DOING');
+  const doneTodos = todoGroup.todos.filter((_) => _.status === 'DONE');
+
   return (
     <TodoGroupCardView cardWidth={cardWidth}>
       <div className="title-area">
@@ -89,12 +94,12 @@ export const TodoGroupCard: React.FC<Props> = ({
           onClick={() => onDelete(todoGroup.id)}
         />
       </div>
-      <ul>
-        {todoGroup.todos.map((todo, i) => {
+      <ul className='doing-todos'>
+        {doingTodos.map((todo, i) => {
           return (
             <li key={`todo-${i}`}>
               <span>{todo.title}</span>
-              <CheckIcon className="check-icon" />
+              <CheckIcon className="check-icon" onClick={() => onDoneTodo(todoGroup.id, i)} />
             </li>
           );
         })}
@@ -106,6 +111,16 @@ export const TodoGroupCard: React.FC<Props> = ({
           block
         />
       </form>
+      <ul className='done-todos'>
+        {doneTodos.map((todo, i) => {
+          return (
+            <li key={`todo-${i}`}>
+              <span>{todo.title}</span>
+              <CheckIcon className="check-icon" />
+            </li>
+          );
+        })}
+      </ul>
     </TodoGroupCardView>
   );
 };

@@ -1,7 +1,13 @@
 import Head from 'next/head';
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { TodoGroup, UpdateTodoGroupInput, TodoInput, TodoStatus } from 'API';
+import {
+  TodoGroup,
+  Todo,
+  UpdateTodoGroupInput,
+  TodoInput,
+  TodoStatus
+} from 'API';
 import { AddTodoGroupButton, TodoGroupCard } from 'components/pages/todo';
 import { TodoGroupModel } from 'models';
 
@@ -11,12 +17,23 @@ const TodoPageView = styled.div`
   align-items: flex-start;
 `;
 
-export default function Todo() {
+export default function TodoPage() {
   const [todoGroups, setTodoGroups] = useState<TodoGroup[]>([]);
   const [showNewTodoGroupInput, setShowNewTodoGroupInput] = useState(false);
   const [groupName, setGroupName] = useState('');
   const cardWidth = '240px';
   const titleInput = useRef<null | HTMLInputElement>(null);
+
+  /**
+   * TodoGroupIdからTodoGroup取得
+   */
+  const getTodoGroup = (todoGroupId: string): TodoGroup | never => {
+    const todoGroup = todoGroups.find(
+      (todoGroup) => todoGroup.id === todoGroupId
+    );
+    if (!todoGroup) throw new Error('更新エラー');
+    return todoGroup;
+  };
 
   /**
    * TodoGroup一覧取得
@@ -77,10 +94,7 @@ export default function Todo() {
   const handleAddTodo = async (title: string, todoGroupId: string) => {
     try {
       // todoGroup取得
-      const todoGroup = todoGroups.find(
-        (todoGroup) => todoGroup.id === todoGroupId
-      );
-      if (!todoGroup) throw new Error('更新エラー');
+      const todoGroup = getTodoGroup(todoGroupId);
 
       // 更新用inputデータ成型
       const todo: TodoInput = {
@@ -95,6 +109,46 @@ export default function Todo() {
         id,
         name,
         todos: [...todos, todo]
+      };
+
+      // 更新
+      const data = await TodoGroupModel.update(input);
+      setTodoGroups(
+        todoGroups.map((group) => {
+          return group.id === data.id ? data : group;
+        })
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  /**
+   * TodoをDONEに更新
+   * @param todoGroupId TodoGroupID
+   * @param todoIndex Todoのindex
+   */
+  const handleDoneTodo = async (todoGroupId: string, todoIndex: number) => {
+    try {
+      console.log(todoIndex);
+      // todoGroup取得
+      const todoGroup = getTodoGroup(todoGroupId);
+
+      // 更新用inputデータ成型(対象Todoステータス書き換えの後、indexを再割り当て)
+      const todos: Todo[] = todoGroup.todos
+        .map((todo) =>
+          todo.index + 1 === todoIndex
+            ? { ...todo, status: TodoStatus.DONE }
+            : todo
+        )
+        .map((todo, index) => {
+          return { ...todo, index };
+        });
+      const { id, name } = todoGroup;
+      const input: UpdateTodoGroupInput = {
+        id,
+        name,
+        todos
       };
 
       // 更新
@@ -138,6 +192,7 @@ export default function Todo() {
               cardWidth={cardWidth}
               onAddTodo={handleAddTodo}
               onDelete={handleDeleteGroup}
+              onDoneTodo={handleDoneTodo}
             />
           );
         })}
