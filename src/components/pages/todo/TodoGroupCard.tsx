@@ -1,9 +1,12 @@
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { TodoGroup, Todo } from 'API';
-import { TextField } from 'components/parts';
+import { TodoGroup, TodoStatus } from 'API';
+import {
+  TodoGroupCardTitle,
+  DoingTodoList,
+  DoneTodoList,
+  TodoInputForm
+} from 'components/pages/todo';
 
 interface StyleProps {
   cardWidth: string;
@@ -12,8 +15,14 @@ interface StyleProps {
 interface ComponentProps {
   todoGroup: TodoGroup;
   onAddTodo: (title: string, todoGroupId: string) => void;
-  onDelete: (todoGroupId: string) => void;
-  onDoneTodo: (todoGroupId: string, todoIndex: number) => void;
+  onDeleteTodoGroup: (todoGroupId: string) => void;
+  onToggleTodoStatus: (
+    todoGroupId: string,
+    todoIndex: number,
+    todoStatus: TodoStatus
+  ) => void;
+  onDeleteTodo: (todoGroupId: string, todoIndex: number) => void;
+  onChangeTodoGroupName: (todoGroupId: string, todoGroupName: string) => void;
 }
 
 type Props = StyleProps & ComponentProps;
@@ -25,102 +34,42 @@ const TodoGroupCardView = styled.div<StyleProps>`
   border-radius: 4px;
   margin-right: 8px;
   margin-bottom: 24px;
-  .title-area {
-    display: flex;
-    align-items: top;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    p {
-      margin: 0;
-      font-weight: 600;
-    }
-    .close-icon {
-      cursor: pointer;
-    }
-  }
-  .doing-todos {
-    margin: 0;
-    padding: 0;
-    li {
-      word-break: break-all;
-      padding: 3px 4px;
-      background-color: #455a64;
-      list-style: none;
-      margin-bottom: 6px;
-      border-radius: 4px;
-      color: #fff;
-      display: flex;
-      align-items: top;
-      justify-content: space-between;
-      :last-child {
-        margin-bottom: 16px;
-      }
-      .check-icon {
-        cursor: pointer;
-        margin-left: 2px;
-      }
-    }
-  }
 `;
 
 export const TodoGroupCard: React.FC<Props> = ({
   todoGroup,
   cardWidth,
   onAddTodo,
-  onDelete,
-  onDoneTodo,
+  onDeleteTodoGroup,
+  onToggleTodoStatus,
+  onDeleteTodo,
+  onChangeTodoGroupName
 }) => {
-  const [newTodoTitle, setNewTodoTitle] = useState('');
-
-  /**
-   * todoタイトルとIDを親に渡す
-   */
-  const handleSubmitTodo = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!newTodoTitle) return;
-    onAddTodo(newTodoTitle, todoGroup.id);
-    setNewTodoTitle('');
-  };
-
+  // 未完了Todo一覧
   const doingTodos = todoGroup.todos.filter((_) => _.status === 'DOING');
+
+  // 完了済Todo一覧
   const doneTodos = todoGroup.todos.filter((_) => _.status === 'DONE');
 
   return (
     <TodoGroupCardView cardWidth={cardWidth}>
-      <div className="title-area">
-        <p>{todoGroup.name}</p>
-        <CloseIcon
-          className="close-icon"
-          onClick={() => onDelete(todoGroup.id)}
-        />
-      </div>
-      <ul className='doing-todos'>
-        {doingTodos.map((todo, i) => {
-          return (
-            <li key={`todo-${i}`}>
-              <span>{todo.title}</span>
-              <CheckIcon className="check-icon" onClick={() => onDoneTodo(todoGroup.id, i)} />
-            </li>
-          );
-        })}
-      </ul>
-      <form onSubmit={handleSubmitTodo}>
-        <TextField
-          value={newTodoTitle}
-          onChange={(e) => setNewTodoTitle(e.target.value)}
-          block
-        />
-      </form>
-      <ul className='done-todos'>
-        {doneTodos.map((todo, i) => {
-          return (
-            <li key={`todo-${i}`}>
-              <span>{todo.title}</span>
-              <CheckIcon className="check-icon" />
-            </li>
-          );
-        })}
-      </ul>
+      <TodoGroupCardTitle
+        todoGroup={todoGroup}
+        onDeleteTodoGroup={onDeleteTodoGroup}
+        onChangeTodoGroupName={onChangeTodoGroupName}
+      />
+      <DoingTodoList
+        todoGroup={todoGroup}
+        doingTodos={doingTodos}
+        onToggleTodoStatus={onToggleTodoStatus}
+      />
+      <TodoInputForm todoGroup={todoGroup} onAddTodo={onAddTodo} />
+      <DoneTodoList
+        todoGroup={todoGroup}
+        doneTodos={doneTodos}
+        onToggleTodoStatus={onToggleTodoStatus}
+        onDeleteTodo={onDeleteTodo}
+      />
     </TodoGroupCardView>
   );
 };

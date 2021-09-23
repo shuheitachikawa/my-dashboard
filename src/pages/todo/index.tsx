@@ -127,23 +127,23 @@ export default function TodoPage() {
    * TodoをDONEに更新
    * @param todoGroupId TodoGroupID
    * @param todoIndex Todoのindex
+   * @param todoStatus Todoの現在のstatus
    */
-  const handleDoneTodo = async (todoGroupId: string, todoIndex: number) => {
+  const handleToggleTodoStatus = async (
+    todoGroupId: string,
+    todoIndex: number,
+    todoStatus: TodoStatus
+  ) => {
     try {
-      console.log(todoIndex);
       // todoGroup取得
       const todoGroup = getTodoGroup(todoGroupId);
 
       // 更新用inputデータ成型(対象Todoステータス書き換えの後、indexを再割り当て)
-      const todos: Todo[] = todoGroup.todos
-        .map((todo) =>
-          todo.index + 1 === todoIndex
-            ? { ...todo, status: TodoStatus.DONE }
-            : todo
-        )
-        .map((todo, index) => {
-          return { ...todo, index };
-        });
+      const status =
+        todoStatus === TodoStatus.DONE ? TodoStatus.DOING : TodoStatus.DONE;
+      const todos: Todo[] = todoGroup.todos.map((todo) =>
+        todo.index === todoIndex ? { ...todo, status } : todo
+      );
       const { id, name } = todoGroup;
       const input: UpdateTodoGroupInput = {
         id,
@@ -164,7 +164,67 @@ export default function TodoPage() {
   };
 
   /**
-   * Todo削除
+   * Todoを削除
+   * @param todoGroupId TodoGroupID
+   * @param todoIndex Todoのindex
+   */
+  const handleDeleteTodo = async (todoGroupId: string, todoIndex: number) => {
+    try {
+      // todoGroup取得
+      const todoGroup = getTodoGroup(todoGroupId);
+
+      // 更新用inputデータ成型（クリックされたindex以外のtodo配列生成）
+      const todos = todoGroup.todos.filter((_) => _.index !== todoIndex);
+      const { id, name } = todoGroup;
+      const input: UpdateTodoGroupInput = {
+        id,
+        name,
+        todos
+      };
+
+      // 更新
+      const data = await TodoGroupModel.update(input);
+      setTodoGroups(
+        todoGroups.map((group) => {
+          return group.id === data.id ? data : group;
+        })
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  /**
+   * TodoGroupの名前変更
+   * @param todoGroupId TodoGroupID
+   * @param todoGroupName TodoGroupの名前
+   */
+  const handleChangeTodoGroupName = async (
+    todoGroupId: string,
+    todoGroupName: string
+  ) => {
+    try {
+      // todoGroup取得
+      const todoGroup = getTodoGroup(todoGroupId);
+      const { id, todos } = todoGroup;
+      const input: UpdateTodoGroupInput = {
+        id,
+        name: todoGroupName,
+        todos
+      };
+
+      // 更新
+      const data = await TodoGroupModel.update(input);
+      setTodoGroups(
+        todoGroups.map((group) => (group.id === data.id ? data : group))
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  /**
+   * TodoGroup削除
    * @param todoGroupId TodoGroupID
    */
   const handleDeleteGroup = async (todoGroupId: string) => {
@@ -191,8 +251,10 @@ export default function TodoPage() {
               todoGroup={todoGroup}
               cardWidth={cardWidth}
               onAddTodo={handleAddTodo}
-              onDelete={handleDeleteGroup}
-              onDoneTodo={handleDoneTodo}
+              onDeleteTodoGroup={handleDeleteGroup}
+              onToggleTodoStatus={handleToggleTodoStatus}
+              onDeleteTodo={handleDeleteTodo}
+              onChangeTodoGroupName={handleChangeTodoGroupName}
             />
           );
         })}
