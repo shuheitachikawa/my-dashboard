@@ -20,6 +20,11 @@ const DoneTodoListView = styled.ul`
   margin: 0;
   margin-top: 8px;
   padding: 0;
+  .list-title {
+    color: gray;
+    margin: 0;
+    font-weight: bold;
+  }
   li {
     word-break: break-all;
     padding: 0px 4px;
@@ -28,10 +33,17 @@ const DoneTodoListView = styled.ul`
     display: flex;
     align-items: top;
     justify-content: space-between;
-    font-size: 15px;
+    font-size: 13px;
+    .icon-group {
+      display: flex;
+    }
     .back-icon {
       cursor: pointer;
       margin-left: 2px;
+      font-size: 20px;
+    }
+    .delete-icon {
+      font-size: 20px;
     }
   }
 `;
@@ -44,11 +56,12 @@ export const DoneTodoList: React.FC<Props> = ({
 }) => {
   return (
     <DoneTodoListView>
+      {!!doneTodos.length && <p className="list-title">Done</p>}
       {doneTodos.map((todo, i) => {
         return (
           <li key={`todo-${i}`}>
             <span>{todo.title}</span>
-            <div className="">
+            <div className="icon-group">
               <ArrowUpwardIcon
                 className="back-icon"
                 onClick={() =>
@@ -56,7 +69,7 @@ export const DoneTodoList: React.FC<Props> = ({
                 }
               />
               <CloseIcon
-                className="close-icon"
+                className="delete-icon"
                 onClick={() => onDeleteTodo(todoGroup.id, todo.index)}
               />
             </div>
