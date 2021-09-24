@@ -1,4 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { TodoGroup } from 'API';
@@ -14,7 +15,7 @@ type Props = ComponentProps;
 
 const TodoGroupCardTitleView = styled.div`
   display: flex;
-  align-items: top;
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
   p {
@@ -22,8 +23,9 @@ const TodoGroupCardTitleView = styled.div`
     font-weight: 600;
     width: 100%;
   }
-  .close-icon {
+  .close-button {
     cursor: pointer;
+    color: inherit;
   }
 `;
 
@@ -70,10 +72,12 @@ export const TodoGroupCardTitle: React.FC<Props> = ({
   return (
     <TodoGroupCardTitleView>
       {renderTitle()}
-      <CloseIcon
-        className="close-icon"
+      <IconButton
+        className="close-button"
         onClick={() => onDeleteTodoGroup(todoGroup.id)}
-      />
+      >
+        <CloseIcon />
+      </IconButton>
     </TodoGroupCardTitleView>
   );
 };

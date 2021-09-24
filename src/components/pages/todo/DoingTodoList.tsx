@@ -1,4 +1,5 @@
 import CheckIcon from '@mui/icons-material/Check';
+import IconButton from '@mui/material/IconButton';
 import React from 'react';
 import styled from 'styled-components';
 import { TodoGroup, TodoStatus, Todo } from 'API';
@@ -27,14 +28,15 @@ const DoingTodoListView = styled.ul`
     border-radius: 4px;
     color: #fff;
     display: flex;
-    align-items: top;
+    align-items: center;
     justify-content: space-between;
     :last-child {
       margin-bottom: 16px;
     }
-    .check-icon {
+    .check-button {
       cursor: pointer;
       margin-left: 2px;
+      /* color: inherit; */
     }
   }
 `;
@@ -50,12 +52,15 @@ export const DoingTodoList: React.FC<Props> = ({
         return (
           <li key={`todo-${i}`}>
             <span>{todo.title}</span>
-            <CheckIcon
-              className="check-icon"
+            <IconButton
+              size="small"
+              className="check-button"
               onClick={() =>
                 onToggleTodoStatus(todoGroup.id, todo.index, todo.status)
               }
-            />
+            >
+              <CheckIcon />
+            </IconButton>
           </li>
         );
       })}

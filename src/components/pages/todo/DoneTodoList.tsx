@@ -44,6 +44,7 @@ const DoneTodoListView = styled.ul`
     }
     .delete-icon {
       font-size: 20px;
+      cursor: pointer;
     }
   }
 `;

@@ -218,7 +218,7 @@ export const useTodoList = () => {
    * @param todoGroupId TodoGroupID
    */
   const handleDeleteGroup = async (todoGroupId: string) => {
-    // if (!confirm('削除しますか？')) return;
+    if (!confirm('削除しますか？')) return;
     try {
       await TodoGroupModel.delete(todoGroupId);
       setTodoGroups(todoGroups.filter((_) => _.id !== todoGroupId));

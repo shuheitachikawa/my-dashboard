@@ -1,17 +1,18 @@
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 import React from 'react';
 import styled from 'styled-components';
 import { TextField, Button } from 'components/parts';
 
 interface StyleProps {
   cardWidth: string;
+  showNewTodoGroupInput: boolean;
 }
 
 interface ComponentProps {
   groupName: string;
-  showNewTodoGroupInput: boolean;
-  titleInput: React.MutableRefObject<null | HTMLInputElement>
+  titleInput: React.MutableRefObject<null | HTMLInputElement>;
   setGroupName: (value: string) => void;
   closeForm: () => void;
   openForm: () => void;
@@ -23,9 +24,10 @@ type Props = StyleProps & ComponentProps;
 const AddTodoGroupButtonView = styled.div<StyleProps>`
   width: ${(props) => props.cardWidth};
   background: #263238;
-  padding: 8px;
+  padding: ${(props) => (props.showNewTodoGroupInput ? '8px' : '0px')};
   border-radius: 4px;
   .button {
+    padding: ${(props) => (props.showNewTodoGroupInput ? '0px' : '8px')};
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -39,9 +41,10 @@ const AddTodoGroupButtonView = styled.div<StyleProps>`
     padding-top: 8px;
     display: flex;
     align-items: center;
-    .close-icon {
+    .close-button {
       margin-left: 8px;
       cursor: pointer;
+      color: inherit;
     }
   }
 `;
@@ -57,7 +60,10 @@ export const AddTodoGroupButton: React.FC<Props> = ({
   handleCreateGroup
 }) => {
   return (
-    <AddTodoGroupButtonView cardWidth={cardWidth}>
+    <AddTodoGroupButtonView
+      cardWidth={cardWidth}
+      showNewTodoGroupInput={showNewTodoGroupInput}
+    >
       {showNewTodoGroupInput ? (
         <form className="input-area" onSubmit={handleCreateGroup}>
           <TextField
@@ -70,7 +76,9 @@ export const AddTodoGroupButton: React.FC<Props> = ({
           />
           <div className="button-area">
             <Button small>リストを追加</Button>
-            <CloseIcon className="close-icon" onClick={closeForm} />
+            <IconButton className="close-button" onClick={closeForm} >
+              <CloseIcon />
+            </IconButton>
           </div>
         </form>
       ) : (

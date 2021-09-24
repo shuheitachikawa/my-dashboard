@@ -31,6 +31,7 @@ const TodoGroupCardView = styled.div<StyleProps>`
   width: ${(props) => props.cardWidth};
   background: #263238;
   padding: 8px;
+  padding-top: 2px;
   border-radius: 4px;
   margin-right: 8px;
   margin-bottom: 24px;
