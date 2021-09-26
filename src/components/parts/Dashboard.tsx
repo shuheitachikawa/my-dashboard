@@ -7,10 +7,10 @@ import { NextPage } from 'next';
 import React from 'react';
 import { ListItems, Header } from 'components/parts';
 
-const drawerWidth = 170;
+const drawerWidth = 48;
 // なぜか初回ログイン時だけglobals.cssの以下スタイルが当たらないためここでも明示。
-const fontColor = '#CFD8DC'
-const backgroundColor = '#455A64'
+const fontColor = '#CFD8DC';
+const backgroundColor = '#455A64';
 
 const useStyles = makeStyles({
   dashboard: {
@@ -29,14 +29,17 @@ const useStyles = makeStyles({
     color: fontColor
   },
   list: {
-    background: backgroundColor
+    background: backgroundColor,
+    padding: '38px 0 0 0',
+    height: '100%',
+    position: 'relative'
   },
   content: {
     flexGrow: 1,
     marginLeft: drawerWidth
   },
   container: {
-    paddingTop: '16px',
+    padding: '16px 8px',
     background: backgroundColor
   }
 });

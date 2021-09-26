@@ -2,8 +2,8 @@ import Check from '@mui/icons-material/Check';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import PeopleIcon from '@mui/icons-material/People';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import Tooltip from '@mui/material/Tooltip';
+import { makeStyles } from '@mui/styles';
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -22,7 +22,21 @@ const menus = [
   }
 ];
 
+const useStyles = makeStyles({
+  listItem: {
+    padding: 0,
+    height: '48px',
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  signOutButton: {
+    position: 'absolute',
+    bottom: 0
+  }
+});
+
 export const ListItems: React.FC = () => {
+  const classes = useStyles();
   const router = useRouter();
   const handleSignOut = async () => {
     try {
@@ -37,21 +51,23 @@ export const ListItems: React.FC = () => {
       {menus.map((menu) => {
         return (
           <Link key={menu.name} passHref={true} href={menu.href}>
-            <ListItem button>
-              <>
-                <ListItemIcon>{menu.icon}</ListItemIcon>
-                <ListItemText primary={menu.name} />
-              </>
-            </ListItem>
+            <Tooltip title={menu.name} arrow placement="right">
+              <ListItem button className={classes.listItem}>
+                {menu.icon}
+              </ListItem>
+            </Tooltip>
           </Link>
         );
       })}
-      <ListItem button onClick={handleSignOut}>
-        <ListItemIcon>
+      <Tooltip title="SignOut" arrow placement="right">
+        <ListItem
+          button
+          className={(classes.listItem, classes.signOutButton)}
+          onClick={handleSignOut}
+        >
           <ExitToAppIcon />
-        </ListItemIcon>
-        <ListItemText primary="SignOut" />
-      </ListItem>
+        </ListItem>
+      </Tooltip>
     </div>
   );
 };
