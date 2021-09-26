@@ -9,7 +9,7 @@ describe('HomePage', () => {
     const heading = screen.queryByText('My Dashboard');
 
     // we can only use toBeInTheDocument because it was imported
-    // in the jest.setup.js and configured in jest.config.js
+    // in the jest.setup.js and configured in jest.config.jsa
     expect(heading).toBeTruthy();
   });
 });
