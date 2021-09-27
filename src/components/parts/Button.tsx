@@ -12,6 +12,7 @@ interface ComponentProps {
   type?: 'submit' | 'button';
   loading?: boolean;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 type Props = StyleProps & ComponentProps;
@@ -40,6 +41,7 @@ export const Button: React.FC<Props> = ({
   disabled = false,
   dark = true,
   small = false,
+  onClick,
   children
 }) => {
   return (
@@ -49,6 +51,7 @@ export const Button: React.FC<Props> = ({
       disabled={disabled}
       dark={dark}
       small={small}
+      onClick={onClick}
     >
       {loading ? <Loader /> : children}
     </ButtonView>

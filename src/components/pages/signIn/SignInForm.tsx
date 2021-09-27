@@ -62,7 +62,7 @@ export const SignInForm: React.FC = () => {
   return (
     <SignInFormView onSubmit={handleSubmit}>
       <h2>
-        <Link href="/">My Dashboard</Link>
+        {/* <Link href="/">{ i18next.t('test') }</Link> */}
       </h2>
       <h3>SignIn😎</h3>
       <TextField

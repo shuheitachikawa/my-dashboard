@@ -1,13 +1,15 @@
 import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Loader } from './Loader';
+
 export default {
-  title: 'Example/Button',
-  component: Loader
+  title: 'parts/Loader',
+  component: Loader,
   // argTypes: {
-  //   backgroundColor: { control: 'color' },
-  // },
-};
+  //   backgroundColor: { control: 'color' }
+  // }
+} as ComponentMeta<typeof Loader>;
 
-export const showLoader = () => <Loader />;
+const Template: ComponentStory<typeof Loader> = () => <Loader />;
 
-export const Default = showLoader.bind({});
+export const Default = Template.bind({});
