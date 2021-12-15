@@ -16,6 +16,11 @@ const menus = [
     href: '/todo'
   },
   {
+    name: 'Table',
+    icon: <Check />,
+    href: '/table'
+  },
+  {
     name: 'Setting',
     icon: <PeopleIcon />,
     href: '/setting'
