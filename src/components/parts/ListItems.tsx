@@ -16,9 +16,14 @@ const menus = [
     href: '/todo'
   },
   {
-    name: 'Table',
+    name: 'ReactTable',
     icon: <Check />,
-    href: '/table'
+    href: '/react_table'
+  },
+  {
+    name: 'AGTable',
+    icon: <Check />,
+    href: '/ag_table'
   },
   {
     name: 'Setting',

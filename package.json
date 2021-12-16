@@ -21,6 +21,8 @@
     "@types/styled-components": "^5.1.14",
     "@typescript-eslint/eslint-plugin": "^4.31.0",
     "@typescript-eslint/parser": "^4.31.0",
+    "ag-grid-community": "^26.2.0",
+    "ag-grid-react": "^26.2.0",
     "aws-amplify": "^4.2.9",
     "eslint-plugin-import": "^2.24.2",
     "next": "11.1.2",

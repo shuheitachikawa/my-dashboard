@@ -52,10 +52,10 @@ export default function TablePage() {
                 }}
               >
                 {column.render('Header')}
-                <div
+                {/* <div
                   {...column.getResizerProps()}
                   className={`resizer ${column.isResizing ? 'isResizing' : ''}`}
-                />
+                /> */}
               </th>
             ))}
           </tr>
